@@ -18,6 +18,7 @@ let mouseInfluence = true; // 'M' alterna
 let noiseSeedOffset = 0;   // Desplazamiento del campo de ruido
 let NOISE_ZOOM = 0.008;    // rueda del mouse
 let theme = 1;             // 1 Neon, 2 Fuego, 3 Hielo, 4 Arcoiris
+let mostrarHUD = true; // HUD visible al inicio
 
 let kaleidoOn = false;      // 'K' para activar/desactivar
 let KALEIDO_SPOKES = 6;     // cantidad de brazos
@@ -261,6 +262,8 @@ function keyPressed() {
   else if (key === 'm' || key === 'M') mouseInfluence = !mouseInfluence;
   else if (key === 's' || key === 'S') saveCanvas('flowfield', 'png');
   else if (key === 'f' || key === 'F') usarCurl = !usarCurl;
+  else if (key === 'E' || key === 'e') saveCanvas('mi_captura', 'png');
+  else if (key === 'h' || key === 'H') {mostrarHUD = !mostrarHUD;}
 
   // velocidad: + y -
   else if (key === '+' || keyCode === 187 || keyCode === 107) {
@@ -295,6 +298,8 @@ function mouseWheel(e) {
 
 
 function dibujarHUD() {
+  if (!mostrarHUD) return;
+
   const hud = [
     `P: ${enPausa ? 'Reanudar' : 'Pausar'}`,
     `B: Recorrido ${trailOn ? 'ON' : 'OFF'}`,
@@ -306,6 +311,8 @@ function dibujarHUD() {
     `X: Repulsion`,
     `Z: Atraccion`,
     `K: Caleidoscopio ${kaleidoOn ? 'ON' : 'OFF'}`,
+    `E: Export PNG`,
+     `H: HUD OFF`
   ].join('   ');
 
   push();
